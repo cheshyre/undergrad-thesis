@@ -1,0 +1,37 @@
+\chapter{Python Library}
+
+A large component of my research has been the development of a 1-D SRG Python library. The goal of this library is to offer a logical abstraction to the details of the SRG method to allow others to test features of SRG in one dimension. It aims to be as permissible as possible, keeping in line with the Python duck typing philosophy, while offering useful feedback for unsupported or obviously incorrect usage. A comprehensive set of unit tests for all parts of the library attempts to instill confidence that the library achieves this goal.
+
+\section{Design}
+
+The class-based abstractions offered by the library offer consistent representations of different logical classes of objects present in any SRG run. The goal is to make code for SRG runs clean and clear to any reader, and to encapsulate certain consistency conditions to make it difficult for the programmer to violate them and write obviously incorrect code. The SRG Solver class is logically different from the other classes in that is not a representation of some data, but rather the abstraction of a state machine of sorts, similar to the typically implementation of numericall differential equation solvers. Instances of the other classes represent concrete objects that have unambiguous logical representations.
+
+IDEA: Tree graph explaining the dependencies between classes: ie, basis consists of an ordered set of states, operator couples a matrix to a specific basis, srg evolves an operator, etc.
+
+\subsection{State}
+
+The state class is one of two classes without dependencies. It offers an abstraction for an $n$-body harmonic oscillator wavefunction. The basic interface consists of a constructor to create an $n$-body state, and a \texttt{val} function to compute the value of the wavefunction at an $n-1$-tuple of momenta. This abstraction is necessary for the transformation from a momentum basis to a harmonic oscillator basis, as the transformation involves the evaluation of the wavefunction at every discretized momentum in the momentum basis.
+
+There are two variants of the state class. The first is the basic 2-body harmonic oscillator state, which abstracts the basic 2-body harmonic oscillator wavefunction. The 2-body harmonic oscillator state is uniquely defined by its harmonic oscillator number. The \texttt{val} method returns the value of this single wavefunction, which involves the evaluation of the $n$-th Hermite polynomial, with $n$ being the harmonic oscillator number.
+
+The second variant is the general $n$-body ($a$-body?) state, which abstracts a normalized linear combination of $n-1$-body-$2$-body states. Every state has an additional condition for consistency: every product state in the linear combination must have the same total harmonic oscillator number. This prevents, among other things, a linear combination of 2-body states from being a valid state, as unique states have different total harmonic oscillator number. The \texttt{val} method returns the linear combination of the \texttt{val} method results for the 2-body and $n-1$-body states that make up the state. The recursive definition of the $n$-body state ensures that any $n$-body state created will be made up of states that are guaranteed to fulfill the consistency conditions.
+
+\subsection{Basis}
+
+\subsection{Operator}
+
+\subsection{SRG Solver}
+
+\section{Implementation}
+
+\subsection{Libraries Used}
+
+\subsection{Handling Undefined Behavior}
+
+\section{Testing}
+
+\subsection{Framework}
+
+\subsection{Code Coverage}
+
+

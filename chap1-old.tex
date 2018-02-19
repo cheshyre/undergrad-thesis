@@ -1,0 +1,232 @@
+\chapter{My First Chapter}
+\begin{quote}
+\lipsum[1]
+\end{quote}
+
+\lipsum[1-3]
+
+
+\section{Glossaries}
+Glossaries are disabled in this version of the template - if you are interested get osudiss-template\_glossary.
+The latex glossaries package can be useful for keeping track of your acronyms, and making a nice hyperlinked 
+list at the beginning of your document.  Note: a glossary/list of acronyms is NOT required by the GS.
+If you do wish to include one, it \textbf{must} appear directly after the lists of figures and tables.
+To use the glossaries package, you must load it in your preamble:
+\begin{verbatim}
+\usepackage[acronym, section=chapter]{glossaries} %load package
+\makeglossaries %required to actually make a glossary
+\include{acronyms} %load list of acronyms contained in acronyms.tex
+\end{verbatim}
+Then, to define an acronym, you will need to include it in your preamble:
+\begin{verbatim}
+\newacronym{AFM}{AFM}{atomic force microscopy}
+\end{verbatim}
+In this template, the acronyms are all placed in a separate file called
+\verb#acronmys.tex# which is then loaded with \verb#\include{acronyms}#, to
+make the main source file easier to read.  You can also just put all
+your acronyms directly in the header of your main source file.
+
+Once you have defined an acronym, you can use it with the \verb#\gls{<label>}# command.
+The first time you use the acronym, the full definition is printed: atomic force microscopy (AFM). %\gls{AFM}.
+On subsequent uses, just the abbreviation is printed: AFM %\gls{AFM}
+ - Latex keeps track
+for you, so you don't have to do this manually.  There are fancier forms
+of \verb#\gls# that allow you to capitalize (\verb#\Gls{<label>}#) or use the 
+plural (\verb#\glspl{<label>}#) forms of your abbreviations.  See 
+for example \url{http://en.wikibooks.org/wiki/LaTeX/Glossary} for details
+on the glossaries package.
+
+If you want to list all your acronyms at the beginning of your document, you
+will need to include the \verb#\makeglossaries# command in your preable, as
+shown above, and then 
+\begin{verbatim}
+\printglossary[type=\acronymtype]
+\end{verbatim}
+where you want the list of abbreviations to actually appear 
+(as stated above, this must be right after your lists of figures and tables in the roman
+numeral pages at the beginning of the document).  Then you have
+to go to the terminal (in the directory containing your document), and run the command
+\begin{verbatim}
+makeglossaries (yourdocumentname)
+\end{verbatim}
+to actually create the glossary.  If you just want Latex to keep track of your acronyms for you 
+and print no list, you can just skip this step and the \verb#printglossary# command.
+
+To make the heading for the List of Abbreviations look the same as the List of Figures
+and List of Tables, instead of using \verb#\printglossary# I defined a custom command to print the glossary:
+\begin{verbatim}
+\newcommand\PrintListofAbbreviations[1]{
+\phantomsection
+\addcontentsline{toc}{front}{\typesetColumnHeading{#1}}
+\printglossary[type=\acronymtype,title={\protect {\typesetLevelTwo{#1}}}]
+\end{verbatim}
+This command functions the same as \verb#\printglossary#, but instead
+of typesetting the heading like a chapter heading (in smallcaps), 
+it typesets in bold like the lists of figures and tables.  
+To use it, just call \verb#\PrintListofAbbreviations{List of Abbreviations}#
+right after \verb#\listoftables# and before \verb#\mainmatter#.
+If you wish to use a different title for you list of abbreviations,
+just call \verb#\PrintListofAbbreviations{Your Title}#.
+I am unsure if the GS has any restrictions on what title you can use.
+
+One final comment, this template uses \verb#makeindex# to create the glossaries
+for compatability (some versions of Ubuntu for example don't support \verb#xindy#).
+However, there is a better program for making glossaries that you can use by calling
+\begin{verbatim}
+\usepackage[xindy,toc,acronym, section=chapter]{glossaries}
+\end{verbatim}
+instead.  In particular, \verb#xindy# allows you to use symbols in your abbreviations,
+such as Greek letters or accented characters, which are not supported by \verb#makeindex#.
+
+
+\section{Example Figures} %this figure requires \usepackage{subfig}
+ \begin{figure}
+ \centering
+
+ %The actual figure
+ % \includegraphics[width=0.45\textwidth]{sine}
+
+ \caption[My first figure]%the text in [] will be displayed in the list of figures.  
+  %If this is omitted, the full figure caption (follows in {}) will be displayed in the list of figures.
+  {\label{fig:sine} My first figure, showing a plot of the sine function.}
+ \vspace{0.5 in}
+ \end{figure}
+
+Fig.\ref{fig:sine} is produced by the following
+\begin{verbatim}
+ \begin{figure}
+ \includegraphics[width=0.45\textwidth]{sine}
+ \caption[My first figure] 
+  {\label{fig:sine} My first figure, showing a plot of the sine function.}
+ \end{figure}
+\end{verbatim}
+The text \verb#[My first figure]# will be displayed in the list of figures.
+If this is omitted, then the full figure caption (follows in \verb#{}#) 
+will be displayed.  If you compile using \verb#latex#, then \verb#sine.eps# will be included.
+If you compile using \verb#pdflatex#, then \verb#sine.pdf# will be used.  \verb#pdflatex#
+also supports including \verb#.jpg# files if you prefer, but there can be artifacts when 
+\verb#.jpg# files are rescaled, however one cannot always generate a PDF if an
+image is ``borrowed'' (Fig.~\ref{fig:battery} uses jpegs).  
+Note that you do \textbf{not} need to include a file extension 
+for the figure - latex adds the appropriate extension automatically.  If you do
+not want to place your figure in the same directory as the latex root document 
+(in this case \verb#template.txt#), then you could instead use something like:
+\begin{verbatim}
+ \includegraphics[width=0.45\textwidth]{directory/figure}
+\end{verbatim}
+
+%  \begin{figure}[h]
+%  \centering
+% \subfloat[Eating One Battery]{\label{one_battery}
+%  %The actual figure, part (a)
+%  % \includegraphics[width=0.45\textwidth]{one_battery}}
+% \hspace{0.5 in}
+% \subfloat[Eating Five Batteries]{\label{five_battery}
+%  %The actual figure, part (a)
+%  % \includegraphics[width=0.3\textwidth]{five_battery}}
+
+
+%  \caption[Eating Batteries]%the text in [] will be displayed in the list of figures.  
+%   %If this is omitted, the full figure caption (follows in {}) will be displayed in the list of figures.
+%   {\label{fig:battery} A man eating batteries \cite{English}.  
+%   Reprinted with permission from Strong Bad.}
+%  \vspace{0.5 in}
+%  \end{figure}
+
+Fig.\ref{fig:battery} is produced by the following
+\begin{verbatim}
+ \begin{figure}
+\subfloat[Eating One Battery]{
+\includegraphics[width=0.45\textwidth]{one_battery}}
+\subfloat[Eating Five Batteries]{
+ \includegraphics[width=0.3\textwidth]{five_battery}}
+ \caption[Eating Batteries]
+  {\label{fig:battery} A man eating batteries. Reprinted with permission from Strong Bad.}
+ \end{figure}
+\end{verbatim}
+This figure is a reproduction of a figure from another ``work''.  
+In this case the ``author'' gives explicit permission to reuse this figure,
+but in most cases you will need to contact the journal to obtain permission to 
+reproduce any part of an article, such as a figure.  
+Journals are generally very nice about letting you reproduce figures 
+for a thesis, and give permission very rapidly (sometime instantly online)
+and don't charge anything.  However, if you do not obtain permission
+you can have serious trouble after your thesis is published.
+Note that you need to obtain permission to reuse figures
+from any published paper, 
+\textit{even if you are the author.} 
+
+This figure also illustrates the use of subfigures via the subfig package, loaded by placing 
+\verb#\usepackage{subfig}# in the preamble of \verb#template.txt#.  This allows you to include
+each subfigure as an individual image, and have latex arrange and label them for you 
+(including an optional name for each subfigure in \verb#[]#).  This also allows
+you to individually reference Fig.~\ref{one_battery} and Fig.~\ref{five_battery}.
+Note that many journals DO NOT support this, and require that each figure be a single
+image, but this should be fine for a thesis.  
+
+
+\section{This is a Section!}
+
+\lipsum[2-4]
+\subsection{This is a Subsection?}
+
+\lipsum[5-10]
+
+\subsubsection{This is a Subsubsection.}
+
+\lipsum
+
+\section{Another Section}
+
+\lipsum[2-4]
+
+\begin{table}
+\begin{center}
+\begin{tabular}{lll}
+\hline
+\\[3pt]
+Alphabet Character & Vowel & Number \\[3pt]
+\hline
+\\[3pt]
+A & Yes & 1 \\
+B & No & 2 \\
+C & No & 3 \\[3pt]
+\hline
+\end{tabular}
+\label{tbl1}
+\caption{My first Table}
+\end{center}
+\end{table}
+
+\lipsum[4-6]
+\begin{table}
+\begin{center}
+\begin{tabular}{lll}
+\hline
+\\[3pt]
+Alphabet Character & Vowel & Number \\[3pt]
+\hline
+\\[3pt]
+A & Yes & 1 \\
+B & No & 2 \\
+C & No & 3 \\[3pt]
+\hline
+\end{tabular}
+\label{tbl2}
+\caption{My second Table}
+\end{center}
+\end{table}
+
+\lipsum[1-12]
+\begin{equation}
+\partial_\mu F^{\mu\nu} = J^\nu
+\end{equation}
+Lorem ipsum your face. Lorem ipsum your face. 
+
+\lipsum[1]A footnote\footnote{Another foot.}.\lipsum[2-5]
+\begin{equation}
+E = \gamma mc^2
+\end{equation}
+Lorem ipsum your face. Lorem ipsum your face. 
+
+\lipsum[2-5]
