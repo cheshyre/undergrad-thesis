@@ -8,6 +8,13 @@ The class-based abstractions offered by the library offer consistent representat
 
 IDEA: Tree graph explaining the dependencies between classes: ie, basis consists of an ordered set of states, operator couples a matrix to a specific basis, srg evolves an operator, etc.
 
+NOTES:
+
+\begin{itemize}
+    \item{Need to work on OOP terms and decide on what specific parts are}
+    \item{Is the term \"dependencies\" for classes correct?}
+\end{itemize}
+
 \subsection{State}
 
 The state class is one of two classes without dependencies. It offers an abstraction for an $n$-body harmonic oscillator wavefunction. The basic interface consists of a constructor to create an $n$-body state, and a \texttt{val} function to compute the value of the wavefunction at an $n-1$-tuple of momenta. This abstraction is necessary for the transformation from a momentum basis to a harmonic oscillator basis, as the transformation involves the evaluation of the wavefunction at every discretized momentum in the momentum basis.
@@ -17,6 +24,12 @@ There are two variants of the state class. The first is the basic 2-body harmoni
 The second variant is the general $n$-body ($a$-body?) state, which abstracts a normalized linear combination of $n-1$-body-$2$-body states. Every state has an additional condition for consistency: every product state in the linear combination must have the same total harmonic oscillator number. This prevents, among other things, a linear combination of 2-body states from being a valid state, as unique states have different total harmonic oscillator number. The \texttt{val} method returns the linear combination of the \texttt{val} method results for the 2-body and $n-1$-body states that make up the state. The recursive definition of the $n$-body state ensures that any $n$-body state created will be made up of states that are guaranteed to fulfill the consistency conditions.
 
 \subsection{Basis}
+
+The basis class offers an immutable, iterable, indexable, ordered collection of state objects. The basic interface implemented by all subclasses consists of an n-body property and a type property, to allow for the user to understand the basic qualities of the basis. The basis object is intended to be used to generate transformations and to be coupled with data matrices to give meaning to the data.
+
+The first subclass of the basis class is the p-basis, a quick representation of a momentum basis. The data representation for an n-body p-basis is a list of n-tuples, with the first entry in the tuple being the weight of that node and the remaining $n-1$ entries being the Jacobi momenta for that node. The construction of the momentum basis supports the generation of an even or weighted grid (Gaussian quadrature) in single momentum space, then constructing the n-body space by generating all possible tuples of $n-1$ momenta from the single momentum space. Currently, this has only been used for 2-body momentum bases, as the potential used for my research is a 2-body potential.
+
+The second subclass of the basis class is the HO-basis, a list of state objects. The construction of the $n$-body HO-basis generates a complete list of appropriatedly symmetrized states up to some user-defined maximum total harmonic oscillator number. As explained in the introduction (where?), the HO-basis offers a more general representation of the data that allows SRG to be applied easily to larger systems, unlike the p-basis. Thus, the generation of correctly symmetrized general n-body HO-bases is essential to testing SRG for larger systems.
 
 \subsection{Operator}
 
