@@ -181,7 +181,7 @@
   % \newcommand\@thesis{Dissertation}
   % \newcommand\@committee{Dissertation}
   \newcommand\@degree{Bachelors of Science with Research Distinction}
-      \newcommand\@thesis{Honors Thesis}
+      \newcommand\@thesis{Undergraduate Research Thesis}
       \newcommand\@committee{Thesis}
 }
 {
@@ -256,7 +256,7 @@
 
   \vspace{3\baselineskip}
   {Presented in Partial Fulfillment of the
-   Requirements for Graduate with Research Distinction in the Honors College of Arts
+   Requirements for Graduation with Honors Research Distinction in Physics in the College of Arts
    and Sciences of The Ohio State University}
 
   \vspace{1\baselineskip}
