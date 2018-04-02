@@ -35,10 +35,10 @@ where $H_n(x)$ is the $n$-th Hermite polynomial. The harmonic oscillator can als
 \end{equation}
 where $\hat{a}^\dagger$ and $\hat{a}$ are raising and lowering operators which act on the harmonic oscillator eigenstates like
 \begin{equation}
-\hat{a}^\dagger\ket{n} = \sqrt(n + 1)\ket{n+1}
+\hat{a}^\dagger\ket{n} = \sqrt{n + 1}\ket{n+1}
 \end{equation}
 \begin{equation}
-\hat{a}\ket{n} = \sqrt(n)\ket{n-1}.
+\hat{a}\ket{n} = \sqrt{n}\ket{n-1}.
 \end{equation}
 
 For an operator, $\hat{V}$, represented with respect to a momentum basis, $V(p, p')$, a transformation to a harmonic oscillator basis can be achieved by the following calculation:
@@ -54,7 +54,7 @@ For a system of $A$ non-interacting particles, the energy eigenstates of the sys
 \end{equation}
 where $\ket{\Psi_k}_i$ is the $k$-th eigenstate of the $i$-th particle's single particle Hamiltonian. For $N$ non-interacting particles in a harmonic oscillator potential, these product states are denoted by:
 \begin{equation}
-\ket{n_1 n_2 ... n_A} = \prod_{i=1}^{A}\ket{n_i}_i
+\ket{n_1 n_2 ... n_A} = \prod_{i=1}^{A}\ket{n_i}_i.
 \end{equation}
 
 
@@ -70,7 +70,7 @@ In this equation, the $\hat{k}_i$ are the single-particle momenta and the $x_i$ 
 
 For local potentials, a factorization of the Hamiltonian into a center-of-mass component, which is unaffected by the potential, and a component relative to the center of mass is possible. This is achieved by a transformation to relative momentum Jacobi coordinates. These are defined to be:
 \begin{equation}
-p_i = \sqrt{\frac{i}{i+1}} \left(\frac{1}{i} \sum_{j=1}^{i}(k_j - k_{i+1})\right)
+p_i = \sqrt{\frac{i}{i+1}} \left(\frac{1}{i} \sum_{j=1}^{i}(k_j - k_{i+1})\right),
 \end{equation}
 with $k_i$ being the single-particle momenta as mentioned above. It is worth noting that for a system of $A$ particles, we only need $A-1$ Jacobi momentum coordinates. We can get $\hat{V}$ in terms of incoming Jacobi momentum $p$ and outgoing momentum $p'$ by taking the following Fourier transform of $\hat{V}(x_1 - x_2)$
 \begin{equation}
@@ -91,7 +91,7 @@ In momentum space, SRG evolutions require separate treatment of 2-body, 3-body, 
 
 \subsection{Symmetrizing the Harmonic Oscillator Basis}
 
-According to the spin-statistics theorem, the state of a system of bosons must be symmetric under any permutation of the particle coordinates. We approach the problem of generating a basis of states that reflect this symmetry recursively, by first symmetrizing the 2-body system and then going from a symmetrized $A-1$-body basis to a symmetrized $N$-body basis. At each stage, we must diagonalize the symmetrizer, the form of which we will show for the 2-body and 3-body cases.
+According to the spin-statistics theorem, the state of a system of bosons must be symmetric under any permutation of the particle coordinates. We approach the problem of generating a basis of states that reflect this symmetry recursively, by first symmetrizing the 2-body system and then going from a symmetrized $A-1$-body basis to a symmetrized $A$-body basis. At each stage, we must diagonalize the symmetrizer, the form of which we will show for the 2-body and 3-body cases.
 
 For the 2-particle system, we are only working with the first Jacobi coordinate and the harmonic oscillator states corresponding to it, $\ket{n_1}$. The symmetrizer is $\hat{S} = (1 + \hat{P}_{12})/2$, where $\hat{P}_{ij}$ is the operator that exchanges the coordinates between $i$-th and $j$-th particles. Because harmonic oscillator wavefunctions are either even for even $n$ or odd for odd $n$, $\hat{P}_{12} \ket{n_1} = (-1)^{n_1} \ket{n_1}$ and the symmetrizer is already diagonal with eigenvalue 0 for odd $n_1$ and eigenvalue 1 for even $n_1$. We select the states with eigenvalue 1 to create our symmetric harmonic oscillator basis for the 2-particle system.
 
@@ -113,7 +113,7 @@ Diagonalizing $\hat{S}$ will give eigenvectors that are normalized linear combin
 
 From equation (2.9), we are able to transform both parts of our 2-body Hamiltonian into the symmetrized 2-body harmonic oscillator basis. In order to work in a our symmetrized 3-body basis, we need to compute the kinetic energy for the 3-body system and embed the 2-body potential in the 3-body space. Both the $A$-body kinetic energy and the $A$-body embedded 2-body potential are defined with respect to their $A-1$-body counterparts, so we will set up the discussion to give those formulas. Let $\ket{N_A i_A}$ be a symmetrized $A$-body state with total harmonic oscillator number $N_A$ and degeneracy label $i_A$. $\ket{N_A i_A}$ is defined as
 \begin{equation}
-\ket{N_A i_A} = \sum_{l=1}^k c_l \ket{N_{A-1} i_{A-1}; n_{A-1}}
+\ket{N_A i_A} = \sum_{l=1}^k c_l \ket{N_{A-1} i_{A-1}; n_{A-1}},
 \end{equation}
 where $k$ is the number of states in the linear combination, $\ket{n_{A-1}}$ is a harmonic oscillator state with respect to the $A-1$-th Jacobi coordinate, and $\ket{N_{A-1} i_{A-1}}$ is a symmetrized $A-1$-body state. The $A$-body kinetic energy is calculated as
 \begin{equation}
@@ -133,13 +133,13 @@ Similarly, the embedded 2-body potential in the $A$-body basis is calculated as
 
 The similarity renormalization group (SRG), whose use in nuclear physics was initially explored at OSU, is one method of reducing the computational complexity of low-energy nuclear calculations. The idea behind it is to continuously unitarily transform the operator of interest (for example, the Hamiltonian) into a simpler form. This simpler form is chosen to allow the large basis to be truncated without affecting the operator eigenvalues, which are essential to the truncated operator's utility in later calculations. The SRG transformation is given by the flow equation for the evolving Hamiltonian $H_s$,
 \begin{equation}
-\frac{d \hat{H}_s}{ds} = [\hat{\eta}_s, \hat{H}_s]
-\end{equation},
+\frac{d \hat{H}_s}{ds} = [\hat{\eta}_s, \hat{H}_s],
+\end{equation}
 where $[A, B]$ is the matrix commutator and $\hat{\eta}_s$ is the generator of the transformation which is defined as
 \begin{equation}
-\hat{\eta}_s = [\hat{G}_s, \hat{H}_s]
+\hat{\eta}_s = [\hat{G}_s, \hat{H}_s],
 \end{equation}
-where $\hat{G}_s$ is known as the flow operator. The changes in the Hamiltonian over the course of the SRG evolution are absorbed into the potential, $\hat{V}_s$ leaving the kinetic energy, $\hat{T}$, independent of $s$, the flow parameter. $s$ is taken to be 0 for the un-evolved Hamiltonian. It is often convenient to use $\lambda = 1 / s^(1/4)$ as an alternative flow parameter, so instead of going from $s=0$ towards $s=\infty$ over the course of an SRG transformation, you are going from $\lambda=\infty$ towards $\lambda=0$. For our purposes, $\lambda=40$ will be a good enough place to start with the initial Hamiltonian.
+where $\hat{G}_s$ is known as the flow operator. The changes in the Hamiltonian over the course of the SRG evolution are absorbed into the potential, $\hat{V}_s$, leaving the kinetic energy, $\hat{T}$, independent of $s$, the flow parameter. $s$ is taken to be 0 for the un-evolved Hamiltonian. It is often convenient to use $\lambda = 1 / s^{1/4}$ as an alternative flow parameter, so instead of going from $s=0$ towards $s=\infty$ over the course of an SRG transformation, you are going from $\lambda=\infty$ towards $\lambda=0$. For our purposes, $\lambda=40$ (or $s=3.9 \times 10^{-7}$) will be a good enough place to start with the initial Hamiltonian.
 
 \subsection{Induced Many-Body Forces and Flow Operators}
 
