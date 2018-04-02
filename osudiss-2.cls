@@ -152,7 +152,7 @@
 \newcommand\typesetLevelThree[1]{{\normalfont\Large\textbf{#1}}}
 \newcommand\typesetLevelFour[1]{{\normalfont\large\textbf{#1}}}
 \newcommand\typesetLevelFive[1]{{\normalfont\normalsize\textbf{#1}}}
-\newcommand\titleFont{\normalfont\Huge\sc}
+\newcommand\titleFont{\normalfont\LARGE\sc}
 \newcommand\titlePageFont{\normalfont\large}
 \renewcommand\contentsname{Table of Contents}
 \renewcommand\partname{Volume}
@@ -251,10 +251,10 @@
   \parbox{\textwidth}{\centering\singlespacing\titleFont\@title\par}
   \titlePageFont
 
-  \vspace{3\baselineskip}
+  \vspace{2\baselineskip}
   \MakeUppercase{\@thesis}
 
-  \vspace{3\baselineskip}
+  \vspace{2\baselineskip}
   {Presented in Partial Fulfillment of the
    Requirements for Graduation with Honors Research Distinction in Physics in the College of Arts
    and Sciences of The Ohio State University}
