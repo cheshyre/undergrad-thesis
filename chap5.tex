@@ -32,7 +32,9 @@ In computing the 2-body Hamiltonian from the Negele potential, we find the 2-bod
 \end{equation}
 where $\Lambda$ is the cutoff momentum that defines the two blocks. For our purposes, we used $\Lambda=2 fm^{-1}$. The value of $\hat{H}_{BD}$ at $\lambda=\infty$ is shown in Fig.~\ref{fig:2body_BD_gen}.
 
-The results of the SRG evolution with this flow operator are shown in Fig.~\ref{fig:2body_BD_ev}. This offers a good way to visualize how alternative generators change to what form the SRG method evolves operators. The reason for exploring such generators is that SRG with $\hat{G}_s=\hat{T}$ essentially fully diagonalizes the Hamiltonian. SRG with alternative generators that do not force decoupling of slightly off-diagonal elements may do less ``work" and therefore induce fewer many-body forces. We want to put this intuition to the test when we reach the 3-body case.
+The results of the SRG evolution with this flow operator are shown in Fig.~\ref{fig:2body_BD_ev}. This offers a good way to visualize how alternative generators change the form to which the SRG method evolves operators. The reason for applying SRG to an operator is to reduce the basis size required to accurately preserve low-energy eigenvalues. What this means is that we want the coupling between the low-energy sector we want to keep and the high-energy sector we want to discard to be zero. Applying SRG with $\hat{G}_s=\hat{T}$ does more than this, driving the entire operator toward the diagonal, even in the low-energy block. It is important to note that if all the low-energy physics is contained inside the low-energy block, we do not care if the matrix is diagonal or not in that block; we have already successfully reduced the size of the problem. Alternative flow operators can be chosen to better reflect these goals, and the intuition is that by avoiding doing unnecessary decoupling, SRG with these flow operators may induce smaller many-body forces. We want to put this intuition to the test when we reach the 3-body case.
+
+% The reason for exploring such generators is that SRG with $\hat{G}_s=\hat{T}$ essentially fully diagonalizes the Hamiltonian. SRG with alternative generators that do not force decoupling of slightly off-diagonal elements may do less ``work" and therefore induce fewer many-body forces. We want to put this intuition to the test when we reach the 3-body case.
 
 \subsection{Harmonic Oscillator Space Transformation}
 \begin{figure}[t]
@@ -55,7 +57,7 @@ To lay the groundwork for exploring the 3-body system, we transform our 2-body o
 \label{fig:2body_kin_comp}
 \end{figure}
 
-As an additional check, compare the kinetic energy calculated in momentum space and transformed to harmonic oscillator space to the kinetic energy operator computed directly from the symmetric harmonic oscillator basis. We find in Fig.~\ref{fig:2body_kin_comp} that they are the same at low harmonic oscillator number, which corresponds to low energies. As these are the same, for the 3-body case we will be working with the transformed potential and the kinetic energy computed directly from the harmonic oscillator basis, as it is cleaner to calculate.%At high energies, we see the transform kinetic energy operator stray from the true tridiagonal form of the kinetic energy in harmonic oscillator space. This is caused by ringing due to the truncation of the harmonic oscillator basis. However, this ringing does not affect the low-energy parts of the kinetic energy and thus has no effect on the lowest eigenvalues, the bound state energies we care about preserving. 
+As an additional check, we compare the kinetic energy calculated in momentum space and transformed to harmonic oscillator space to the kinetic energy operator computed directly from the symmetric harmonic oscillator basis. We find in Fig.~\ref{fig:2body_kin_comp} that they are the same at low harmonic oscillator number, which corresponds to low energies. As these are the same, for the 3-body case we will be working with the transformed potential and the kinetic energy computed directly from the harmonic oscillator basis, as it is cleaner to calculate.%At high energies, we see the transform kinetic energy operator stray from the true tridiagonal form of the kinetic energy in harmonic oscillator space. This is caused by ringing due to the truncation of the harmonic oscillator basis. However, this ringing does not affect the low-energy parts of the kinetic energy and thus has no effect on the lowest eigenvalues, the bound state energies we care about preserving. 
 
 \section{3-Body}
 
@@ -82,7 +84,7 @@ For the 3-body symmetric harmonic oscillator basis, we stay with $N_{max}=28$ in
 \label{fig:alpha_w}
 \end{figure}
 
-When going from momentum space to harmonic oscillator space, we must optimize $\omega$, the parameter for the harmonic oscillator basis. The optimal $\omega$ will minimize the ground state energy, which will be the best we can do to reproduce the low-energy eigenvalues for a given $N_{max}$. We find that roughly the same value for $\omega$ optimizes both the 2-body ground state energy and the 3-body ground state energy, as shown in Fig.~\ref{fig:alpha_w}
+When going from momentum space to harmonic oscillator space, we must optimize $\omega$, the parameter for the harmonic oscillator basis. The optimal $\omega$ will minimize the ground state energy, which will be the best we can do to reproduce the low-energy eigenvalues for a given $N_{max}$. We find that roughly the same value for $\omega$ optimizes both the 2-body ground state energy and the 3-body ground state energy, as shown in Fig.~\ref{fig:alpha_w}.
 
 
 \subsection{3-Body Force Induction for $\hat{G}_s=\hat{T}$}
@@ -100,11 +102,11 @@ We then compare the 3-body ground state values for a Hamiltonian evolved in 3-bo
 
 \subsection{3-Body Force Induction for Alternative Flow Operators}
 
-We test two parametrizations an alternative flow operator, $\hat{H}_{BDHO}$, that is block diagonal in harmonic oscillator space, defined as
+We test two parametrizations for an alternative flow operator, $\hat{H}_{BDHO}$, that is block diagonal in harmonic oscillator space, defined as
 \begin{equation}
 \hat{G}_s = \hat{H}_{BDHO} = \hat{T} + \hat{V} \Theta(N - \Lambda) \Theta(N' - \Lambda),
 \end{equation}
-where $\Lambda$ is the block cutoff in harmonic oscillator space. We use $\Lambda=6$ and $\Lambda=10$ for our tests. We find that both parametrizations offer a substantial decrease in the induced 3-body force. In particular, $\Lambda=10$ induces nearly no 3-body force, keeping the 3-body ground state energy within less than 1\% of its true value.
+where $\Lambda$ is the block cutoff in harmonic oscillator space. We use $\Lambda=6$ and $\Lambda=10$ for our tests. We find that both parametrizations offer a substantial decrease in the induced 3-body force, as shown in Fig.~\ref{fig:heinz_newfull}. In particular, $\Lambda=10$ induces nearly no 3-body force, keeping the 3-body ground state energy within less than 1\% of its true value.
 
 \begin{figure}[th!]
 \begin{center}
@@ -115,6 +117,8 @@ where $\Lambda$ is the block cutoff in harmonic oscillator space. We use $\Lambd
 \label{fig:heinz_newfull}
 \end{figure}
 
-While these results show promise for $\hat{H}_{BDHO}$ as an improved flow operator, they are still preliminary. Tests must be run that look at 4-body and 5-body forces, in order to ensure induced many-body forces remain strictly smaller than for $\hat{G}_s=\hat{T}$. The \texttt{srg1d} framework also allows to easily test more flow operators, which we must due to get a more comprehensive idea of what features of the flow operators reduce or enhance many-body force induction.
+While these results show promise for $\hat{H}_{BDHO}$ as an improved flow operator, they are still preliminary. It may be the case case that $\hat{H}_{BDHO}$ and $\hat{T}$ decouple off-diagonal matrix elements at different rates with respect to $\lambda$, meaning that $\lambda=1$ for $\hat{T}$ evolutions does not correspond to $\lambda=1$ for $\hat{H}_{BDHO}$ evolutions. While some quick tests ``by eye" suggest this is not the case, it must still be verified more robustly. This can be done by imposing some cutoff on the 2-body space and checking that the $\lambda$ at which both evolutions reproduce the correct ground state energy is similar. If it is not similar, it will be necessary to figure out a mapping of corresponding values of $\lambda$ for the two evolutions.
+
+Additionally, tests must be run that look at 4-body and 5-body forces, in order to ensure induced many-body forces remain strictly smaller than for $\hat{G}_s=\hat{T}$. The \texttt{srg1d} framework also allows to easily test more flow operators, which we must due to get a more comprehensive idea of what features of the flow operators reduce or enhance many-body force induction.
 
 
