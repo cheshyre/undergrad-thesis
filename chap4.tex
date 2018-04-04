@@ -1,27 +1,68 @@
-\chapter{Approach to Exploration}
+\chapter{Approach to Exploration}\label{methods}
+
+In this chapter, we discuss the approach taken to reproducing results from previous work and exploring how using alternative flow operators changes these results.
 
 \section{Objectives}
 
 \subsection{Verify Many-Body Force Induction}
 
+The first major goal of the project was to use the new, more flexible framework provided by the \texttt{srg1d} library to reproduce 2-body and 3-body results published in Ref.~\cite{Jurgenson:2008jp}. While the 2-body results do not give any insight into many-body force induction, they offer an intermediate point for us to look at and be certain of the correctness of our work so far. The 3-body results allow us to look at many-body force induction and reproducing the Jurgenson 3-body results gives us a good point to compare to when testing other flow operators.
+
 \subsection{Test Alternative Flow Operators}
+
+The second major goal after reproducing previous results was to use alternative flow operators and observe how the results of the SRG evolution change. With the framework of the \texttt{srg1d} library, changing the flow operator for existing an SRG calculation is as simple as changing two lines of code in most cases. With the ability to easily switch flow operators, we are able to easily take calculations reproducing previous results and use them with new flow operators to directly see the change caused by changing the flow operator.
 
 \section{2-Particle Systems}
 
-\subsection{Verify Momentum Space Results}
+We use the Negele 2-body potential adopted from Ref.~\cite{Alexandrou:1988jg}, which was also used in Ref.~\cite{Jurgenson:2008jp}:
+\begin{equation}\label{eq:negele}
+\hat{V}(p, p') = \frac{V_1}{2\pi\sqrt2}e^{-(p-p')^2\sigma_1^2/8} + \frac{V_2}{2\pi\sqrt2}e^{-(p-p')^2\sigma_2^2/8}.
+\end{equation}
+We use the same sets of parameters as used previously, detailed in Table \ref{table:negele_params}. The $\hat{V}_\alpha$ potential features a mid-range attraction and a strong short-range repulsion, similar in nature to real nucleon-nucleon potentials. The $\hat{V}_\beta$ potential is a purely attractive potential.
 
-\subsection{Preliminary Alternative Flow Operator Tests}
+\begin{table}[t]
+\begin{center}
+\begin{tabularx}{\textwidth}{ X X X X X X X } 
+ \hline
+ Name & $V_1$ & $\sigma_1$ & $V_2$ & $\sigma_2$ & $E_2$ & $E_3$ \\ 
+ \hline
+ $\hat{V}_\alpha$ & 12.0 & 0.2 & -12.0 & 0.8 & −0.920 & -2.567\\ 
+ $\hat{V}_\beta$ & 0.0 & 0.0 & -2.0 & 0.8 & -0.474 & -1.708 \\ 
+ \hline
+\end{tabularx}
+\end{center}
+\caption{Parameters for two variants of the 2-body Negele potential from Eq. \ref{eq:negele} and their corresponding 2-body and 3-body ground state energies, denoted by $E_2$ and $E_3$ respectively.}
+\label{table:negele_params}
+\end{table}
 
-\subsection{Transform to Harmonic Oscillator Space}
+We compute the 2-body Hamiltonian with this potential in momentum space and verify that the ground state energy eigenvalues match. We then run the SRG method on the 2-body momentum-space Hamiltonian and verify that it is truly unitary and behaves in the same way as in Fig.~\ref{fig:jurg_2body_ev}. We then perform the transformation to symmetrized 2-body harmonic oscillator basis, checking that the ground state energy is unchanged by the unitary transformation. We perform an additional check on the correctness of the transformation by ensuring that the transformed kinetic energy operator is equal to the 2-body kinetic energy as calculated directly from the harmonic oscillator basis.
 
-\subsection{Check Kinetic Energies}
+\begin{figure}[t]
+\begin{center}
+ \includegraphics*[height=1.4in]{V_srg_lam_40}
+\includegraphics*[height=1.4in]{V_srg_lam_5}
+ \includegraphics*[height=1.4in]{V_srg_lam_3}
+ \includegraphics*[height=1.4in]{V_srg_lam_2}
+\end{center}
+\caption{Evolution from $\lambda=\infty$ to $\lambda=2$ of the even part of the $\hat{V}_\alpha$ potential in 2-body momentum space from Ref.~\cite{Jurgenson:2008jp}. Figure reproduced with permission of the author.}
+\label{fig:jurg_2body_ev}
+\end{figure}
+
+We then use the 2-body Hamiltonian to experiment with different flow operators. While the 2-body system does not give any insight into the many-body forces induced by SRG when using these flow operators, it does give an excellent way to visualize how the action of the SRG transformation on the operator changes because of the alternative flow operators.
 
 \section{3-Particle Systems}
 
-\subsection{3-Particle Basis Symmetrization}
+Moving to a 3-body system allows us to get our first results for 3-body force induction for Hamiltonians evolved in a 2-body system. To observe this, we first generate the 3-body symmetrized harmonic oscillator basis by generating all possible product states, computing and diagonalizing the symmetrizer, and keeping states with eigenvalue 1. With the symmetric 3-body basis, we are able to compute the 3-body kinetic energy and embed the 2-body potential from the 2-body basis in the 3-body basis. With these 3-body operators, we are able to compute the 3-body ground state energy and compare it to the previously published value for it given in Table \ref{table:negele_params}.
 
-\subsection{Verify Computed 3-Body Eigenvalues}
+\begin{figure}[t]
+\begin{center}
+\subfloat[$\hat{V}_\alpha$\label{fig:jurg_va}]{\centering\includegraphics*[height=2.5in]{Ebind_3N_Va}}
+\hfill
+\subfloat[$\hat{V}_\beta$\label{fig:jurg_vb}]{\centering\includegraphics*[height=2.5in]{Ebind_3N_Vf}}
+\end{center}
+\caption{Demonstration of an induced 3-body force in (a) the 3-body $\hat{V}_\alpha$ ground state energy and (b) the 3-body $\hat{V}_\beta$ ground state energy from Ref.~\cite{Jurgenson:2008jp}. Figure reproduced with permission of the author.}
+\label{fig:jurg_vfull}
+\end{figure}
 
-\subsection{Test $\hat{G}=\hat{T}$ Many-Body Force Induction}
+After properly embedding the 2-body potential in the 3-body basis, we are able to see how the 2-body SRG evolution with the standard kinetic energy flow operator induces a 3-body force in the 3-body ground state energy. We verify that this behavior matches that shown in Fig.~\ref{fig:jurg_vfull}. We then use the same approach to see the strength of 3-body forces induced by 2-body SRG evolution with alternative flow operators.
 
-\subsection{Test Alternative Flow Operator Many-Body Force Induction}

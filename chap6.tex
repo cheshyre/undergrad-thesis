@@ -1,7 +1,28 @@
-\chapter{Conclusion and Outlook}
+\chapter{Conclusion}
+
+In this chapter, we discuss what is still left in scope for development on the \texttt{srg1d} library. We recap the results of our exploration. Finally, we discuss open questions and suggest some points of interest that merit further exploration.
 
 \section{Future Development on \texttt{srg1d}}
 
-\section{Conclusion}
+The biggest feature left to implement for the \texttt{srg1d} library is support for the generation of a general $A$-body basis. This feature comes mostly down to computing the matrix elements in the symmetrizer. While the equation to compute the matrix elements is listed in Ref.~\cite{Jurgenson:2008jp}, it is something that leaves room for many potential bugs. As a result, the implementation must be handled with a lot of care and must be accompanied by extensive validation, most likely in the form of evaluation of the matrix elements for low $N_{max}$.
+
+There is also some room for additional quality-of-life improvements. First, the coefficients for the symmetrized basis can be memoized by storing them in several files and looking them up on basis calculations. These lookups can be used even when the user requests a larger $N_{max}$ basis than has been stored because the symmetrization for each set of states with the same total harmonic oscillator happens independently. Symmetrization and the calculation of the symmetric basis states is expensive. Profiling of the current state of the code suggests that symmetrizing the 3-body basis accounts for over half of the setup (pre-SRG) time in calculations.
+
+Additionally, while the documentation for the library so far is fairly comprehensive, the pydocs could be fleshed out with concrete examples. Variable names could be adjusted to offer more clarity to readers. When interfaces are fully finalized, it will also make sense to push the entire library to version 1.0.0 and carefully follow the semantic versioning specification \cite{semver}.
+
+\section{Recap of Results}
+
+We found that with the \texttt{srg1d} framework we are able to reproduce the 2-body and 3-body results from the 2008 Jurgenson paper \cite{Jurgenson:2008jp}. We use these results to validate our implementation for 2-body and 3-body systems. As the key algorithms for working in higher-body spaces are recursive, this also implies that our implementation is correct in general. We were able to reproduce the key plots showing 3-body force induction with $\hat{G}_s=\hat{T}$.
+
+We defined an alternative flow operator, $\hat{H}_{BDHO}$. When testing 3-body force induction for SRG with $\hat{H}_{BDHO}$, we found that the 3-body force induced was substantially smaller than for $\hat{T}$. While this result is promising, we cannot speak to how these flow operators perform in general until we are able to test them in 4-body and 5-body systems.
 
 \section{Open Questions and Outlook}
+
+There are a couple open questions directly related to this work:
+\begin{itemize}
+    \item How do the 4-body and 5-body forces induced by SRG with $\hat{H}_{BDHO}$ compare to those induced by SRG with $\hat{T}$?
+    \item What features of flow operators reduce or enhance the induction of many-body forces?
+    \item What are the performance or practicality trade-offs that come as a result of smaller many-body force induction?
+\end{itemize}
+
+The \texttt{srg1d} framework is (or soon will be) in an excellent position to allow researchers to get answers to all of these questions. This thesis offers preliminary results that show this problem still has a lot of room for exploration. However, these preliminary results must be investigated more comprehensively before general conclusions can be drawn. 
