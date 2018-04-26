@@ -61,10 +61,10 @@
 \usepackage{subfig}
 
 %load glossaries packages
-\usepackage[acronym, section=chapter]{glossaries}
+% \usepackage[acronym, section=chapter]{glossaries}
 %\usepackage[xindy,acronym, section=chapter]{glossaries} - recommended if supported by your OS
-\makeglossaries %required to actually make a glossary
-\include{acronyms} %load list of acronyms contained in acronyms.tex
+% \makeglossaries %required to actually make a glossary
+% \include{acronyms} %load list of acronyms contained in acronyms.tex
 
 %The following commands can be used to help deal with "overfull hbox" issues
 %See, for example, http://www.tex.ac.uk/cgi-bin/texfaq2html?label=overfull for details
@@ -74,16 +74,16 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%% Custom Commands/Environments %%%%%%%%%%%%%%%%%%%%%%%%%
 % Put your favorite custom commands here
-\newcommand{\fish}{\alpha} % some of my students call it the "fish" symbol
+% \newcommand{\fish}{\alpha} % some of my students call it the "fish" symbol
 
 %Print list of abbreviations - use same font as List of Figures and List of Tables for the title, and same formatting in the table of contents.
 % Argument #1 - title for list of abbreviations (i.e. List of Abbreviations)
 
-\newcommand\PrintListofAbbreviations[1]{
-\phantomsection
-\addcontentsline{toc}{front}{\typesetColumnHeading{#1}}
-\printglossary[type=\acronymtype,title={\protect {\typesetLevelTwo{#1}}}]
-}
+% \newcommand\PrintListofAbbreviations[1]{
+% \phantomsection
+% \addcontentsline{toc}{front}{\typesetColumnHeading{#1}}
+% \printglossary[type=\acronymtype,title={\protect {\typesetLevelTwo{#1}}}]
+% }
 
 % Below is an example of customizing the style of headings in your
 % dissertation. See osudiss-2.pdf for more information.
@@ -103,11 +103,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%% Document Metadata %%%%%%%%%%%%%%%%%%%%%%%%%
 \title{Exploring Many-Body \\Force Induction in the \\ Similarity Renormalization Group \\ in 1 Dimension}
 \author{Matthias Heinz}
-\advisorname{Professor Richard Furnstahl}
+\advisorname{Prof.~Richard Furnstahl}
 \degree{Bachelors of Science with Research Distinction} % Default value
 % \member{Prof. Richard Furnstahl}
-\member{Prof. Robert Perry}
-\member{Prof. P Sadayappan}
+\member{Prof.~Robert Perry}
+\member{Prof.~P Sadayappan}
 % \authordegrees{B.S.}
 \graduationyear{2018}
 \unit{Undergraduate Program in Physics} % defaults to ``Graduate Program in Physics''
@@ -119,7 +119,7 @@
 
 \include{thesis-abstract}
 % \dedication{To you, my love.} % Optional, and seriously not this lame
-% \include{thesis-ack}
+\include{thesis-ack}
 % \include{thesis-vita}
 \tableofcontents 
 
@@ -132,8 +132,8 @@
 \listoftables 
 
 %print glossary - comment out if you don't want this.  Make sure you also add \glsdisablehyper if you don't want to print a glossary, but do use the %glossaries package to keep track of acronyms
-\clearpage %remove if you don't want a page break before list of abbreviations
-\PrintListofAbbreviations{List of Abbreviations} %Title is in { } - change if desired
+% \clearpage %remove if you don't want a page break before list of abbreviations
+% \PrintListofAbbreviations{List of Abbreviations} %Title is in { } - change if desired
 
 \mainmatter
 \include{chap1}
@@ -160,7 +160,7 @@
 % if you believe their guidelines; however, conversations with GS
 % staff suggests _they don't care_. Go figure. So do what you like.
 
-\appendix
+% \appendix
 % \include{app1}
 % \include{app2}
 

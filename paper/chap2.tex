@@ -38,7 +38,7 @@ which has eigenstates $\ket{n}$, which have corresponding wavefunctions
 \begin{equation}
 \Phi_n(p) = \frac{(-i)^n}{\sqrt{2^n n!}}\left(\frac{1}{\pi m \hbar \omega}\right)^{1/4}e^{-p^2 / 2 m \hbar \omega} H_n\left(\frac{p}{\sqrt{m \omega \hbar}}\right)
 \end{equation}
-where $H_n(x)$ is the $n$-th Hermite polynomial. The three lowest energy momentum-space wavefunctions, $\Phi_n(p)$, can be seen in Fig.~\ref{fig:ho_wf}. The harmonic oscillator can also be rewritten as
+where $H_n(x)$ is the $n$-th Hermite polynomial. The three lowest energy momentum-space wavefunctions, $\Phi_n(p)$, can be seen in Fig.~\ref{fig:ho_wf}. The harmonic oscillator Hamiltonian can also be rewritten as
 \begin{equation}
 \hat{H}_{HO} = \hbar \omega \left(\hat{a}^\dagger \hat{a} + \frac{1}{2}\right),
 \end{equation}
@@ -77,7 +77,7 @@ In this equation, the $\hat{k}_i$ are the single-particle momenta and the $x_i$ 
 
 \subsection{Jacobi Coordinates}
 
-A factorization of the Hamiltonian into a center-of-mass component, which is unaffected by the local potential, and a component relative to the center of mass is possible. This is achieved by a transformation to relative momentum Jacobi coordinates. These are defined to be:
+A factorization of the Hamiltonian into a center-of-mass component, which is unaffected by the local potential, and a component relative to the center of mass is possible. This is achieved by a transformation to relative momentum Jacobi coordinates \cite{Jurgenson:2008jp}. These are defined to be:
 \begin{equation}
 p_i = \sqrt{\frac{i}{i+1}} \left(\frac{1}{i} \sum_{j=1}^{i}(k_j - k_{i+1})\right),
 \end{equation}
@@ -93,14 +93,14 @@ where $\mu$ is the reduced mass given by $\mu = m / A$ for particles of equal ma
 
 \subsection{Transformation To Harmonic Oscillator States}
 
-In momentum space, SRG evolutions require separate treatment of 2-body, 3-body, and higher-body potentials, to avoid delta functions caused by spectator particles. A particle is a spectator particle when it is in a state where it does not interact with two particles that are interacting with each other. To avoid the cognitive load of handling all these potentials separately, we can make a transformation to a discrete basis. The discrete basis of choice for this project is the harmonic oscillator basis with respect to the Jacobi coordinates. This transformation can be achieved as shown in Eq.~\ref{eq:ho_transform}. From here on out, $\ket{n_i}$ will mean the $n$-th harmonic oscillator state with respect to the $i$-th Jacobi coordinate. So for a full treatment of an $N$-particle system, we will need product states for $N-1$ Jacobi coordinates,
+In momentum space, SRG evolutions require separate treatment of 2-body, 3-body, and higher-body potentials, to avoid delta functions caused by spectator particles \cite{glöckle1983quantum}. A particle is a spectator particle when it is in a state where it does not interact with two particles that are interacting with each other. To avoid the cognitive load of handling all these potentials separately, we can make a transformation to a discrete basis. The discrete basis of choice for this project is the harmonic oscillator basis with respect to the Jacobi coordinates. This transformation can be achieved as shown in Eq.~\ref{eq:ho_transform}. From here on out, $\ket{n_i}$ will mean the $n$-th harmonic oscillator state with respect to the $i$-th Jacobi coordinate. So for a full treatment of an $N$-particle system, we will need product states for $N-1$ Jacobi coordinates,
 \begin{equation}
 \ket{n_1 n_2 ... n_{A-1}} = \prod_{i=1}^{A-1}\ket{n_i}.
 \end{equation}
 
 \subsection{Symmetrizing the Harmonic Oscillator Basis}
 
-According to the spin-statistics theorem, the state of a system of bosons must be symmetric under any permutation of the particle coordinates. We approach the problem of generating a basis of states that reflect this symmetry recursively, by first symmetrizing the 2-body system and then going from a symmetrized $(A-1)$-body basis to a symmetrized $A$-body basis. At each stage, we must diagonalize the symmetrizer, the form of which we will show for the 2-body and 3-body cases.
+According to the spin-statistics theorem, the state of a system of bosons must be symmetric under any permutation of the particle coordinates \cite{streater2000pct}. We approach the problem of generating a basis of states that reflect this symmetry recursively, by first symmetrizing the 2-body system and then going from a symmetrized $(A-1)$-body basis to a symmetrized $A$-body basis. At each stage, we must diagonalize the symmetrizer, the form of which we will show for the 2-body and 3-body cases.
 
 For the 2-particle system, we are only working with the first Jacobi coordinate and the harmonic oscillator states corresponding to it, $\ket{n_1}$. The symmetrizer is $\hat{S} = (1 + \hat{P}_{12})/2$, where $\hat{P}_{ij}$ is the operator that exchanges the coordinates between $i$-th and $j$-th particles. Because harmonic oscillator wavefunctions are either even for even $n$ or odd for odd $n$, $\hat{P}_{12} \ket{n_1} = (-1)^{n_1} \ket{n_1}$ and the symmetrizer is already diagonal with eigenvalue 0 for odd $n_1$ and eigenvalue 1 for even $n_1$. We select the states with eigenvalue 1 to create our symmetric harmonic oscillator basis for the 2-particle system.
 
@@ -120,7 +120,7 @@ Diagonalizing $\hat{S}$ will give eigenvectors that are normalized linear combin
 
 \subsection{Matrix Elements in the 3-Body Harmonic Oscillator Space}
 
-From Eq.~\ref{eq:ho_transform}, we are able to transform both parts of our 2-body Hamiltonian into the symmetrized 2-body harmonic oscillator basis. In order to work in a symmetrized 3-body basis, we need to compute the kinetic energy for the 3-body system and embed the 2-body potential in the 3-body space. Both the $A$-body kinetic energy and the $A$-body embedded 2-body potential are defined with respect to their $(A-1)$-body counterparts, so we will set up the discussion to give those formulas. Let $\ket{N_A i_A}$ be a symmetrized $A$-body state with total harmonic oscillator number $N_A$ and degeneracy label $i_A$. $\ket{N_A i_A}$ is defined as
+From Eq.~\ref{eq:ho_transform}, we are able to transform both parts of our 2-body Hamiltonian into the symmetrized 2-body harmonic oscillator basis. In order to work in a symmetrized 3-body basis, we need to compute the kinetic energy for the 3-body system and embed the 2-body potential in the 3-body space. Both the $A$-body kinetic energy and the $A$-body embedded 2-body potential are defined with respect to their $(A-1)$-body counterparts \cite{Jurgenson:2008jp}, so we will set up the discussion to give those formulas. Let $\ket{N_A i_A}$ be a symmetrized $A$-body state with total harmonic oscillator number $N_A$ and degeneracy label $i_A$. $\ket{N_A i_A}$ is defined as
 \begin{equation}
 \ket{N_A i_A} = \sum_{l=1}^k c_l \ket{N_{A-1} i_{A-1}; n_{A-1}},
 \end{equation}
@@ -128,7 +128,7 @@ where $k$ is the number of states in the linear combination, the $c_l$ are the c
 \begin{equation}
 \begin{aligned}
 \bra{N_A' i_A'}\hat{T_A}\ket{N_A i_A} = & \sum_{l=1}^k \sum_{l'=1}^{k'} c_l c_{l'}' (\bra{N_{A-1}' i_{A-1}'}\hat{T_{A-1}}\ket{N_{A-1} i_{A-1}}\delta_{n_{A-1}',n_{A-1}} \\ 
-& + \frac{\omega}{4}\delta_{N_{A-1}',N_{A-1}}(\sqrt{(n_{A-1} + 1)(n_{A-1} + 2)}\delta_{n_{A-1}',n_{A-1} + 2} \\
+& - \frac{\omega}{4}\delta_{N_{A-1}',N_{A-1}}(\sqrt{(n_{A-1} + 1)(n_{A-1} + 2)}\delta_{n_{A-1}',n_{A-1} + 2} \\
 & + \sqrt{n_{A-1}(n_{A-1} - 1)}\delta_{n_{A-1}',n_{A-1} - 2} \\
 & - (2 n_{A-1} + 1)\delta_{n_{A-1}',n_{A-1}})).
 \end{aligned}
@@ -140,7 +140,7 @@ Similarly, the embedded 2-body potential in the $A$-body basis is calculated as
 
 \section{Similarity Renormalization Group}
 
-The similarity renormalization group (SRG), whose use in low-energy nuclear physics was initially explored at OSU, is one method of reducing the computational complexity of low-energy nuclear calculations. The idea behind it is to continuously unitarily transform the operator of interest (for example, the Hamiltonian) into a simpler form. This simpler form is chosen to allow the large basis to be truncated without affecting the operator eigenvalues, which are essential to the truncated operator's utility in later calculations. The SRG transformation is given by the flow equation for the evolving Hamiltonian $H_s$,
+The similarity renormalization group (SRG), whose use in low-energy nuclear physics was initially explored at OSU \cite{Jurgenson:2007td}, is one method of reducing the computational complexity of low-energy nuclear calculations. The idea behind it is to continuously unitarily transform the operator of interest (for example, the Hamiltonian) into a simpler form. This simpler form is chosen to allow the large basis to be truncated without affecting the operator eigenvalues, which are essential to the truncated operator's utility in later calculations. The SRG transformation is given by the flow equation for the evolving Hamiltonian $\hat{H}_s$,
 \begin{equation}
 \frac{d \hat{H}_s}{ds} = [\hat{\eta}_s, \hat{H}_s],
 \end{equation}
