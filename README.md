@@ -4,9 +4,10 @@
 
 This repository contains the most up-to-date version of my bachelor's thesis.
 While I have corrected a few minor typography mistakes and typos since
-submitting it, the version of the thesis submitted at the time of my defense
-can be seen by selecting the `defense_version` tag. For convenience, abstract
-is offered below.
+submitting it, the version that was submitted can be seen by selecting the
+`submission_version` tag. In addition, the version of the thesis at the time of
+my defense can be seen by selecting the `defense_version` tag. For
+convenience, abstract is offered below.
 
 ## Abstract
 
