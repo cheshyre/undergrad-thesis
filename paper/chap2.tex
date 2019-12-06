@@ -100,7 +100,10 @@ In momentum space, SRG evolutions require separate treatment of 2-body, 3-body, 
 
 \subsection{Symmetrizing the Harmonic Oscillator Basis}
 
-According to the spin-statistics theorem, the state of a system of bosons must be symmetric under any permutation of the particle coordinates \cite{streater2000pct}. We approach the problem of generating a basis of states that reflect this symmetry recursively, by first symmetrizing the 2-body system and then going from a symmetrized $(A-1)$-body basis to a symmetrized $A$-body basis. At each stage, we must diagonalize the symmetrizer, the form of which we will show for the 2-body and 3-body cases.
+According to the spin-statistics theorem, the state of a system of bosons must
+be symmetric under any permutation of the particle coordinates
+\cite{streater2000pct}.
+We approach the problem of generating a basis of states that reflects this symmetry recursively, by first symmetrizing the 2-body system and then going from a symmetrized $(A-1)$-body basis to a symmetrized $A$-body basis. At each stage, we must diagonalize the symmetrizer, the form of which we will show for the 2-body and 3-body cases.
 
 For the 2-particle system, we are only working with the first Jacobi coordinate and the harmonic oscillator states corresponding to it, $\ket{n_1}$. The symmetrizer is $\hat{S} = (1 + \hat{P}_{12})/2$, where $\hat{P}_{ij}$ is the operator that exchanges the coordinates between $i$-th and $j$-th particles. Because harmonic oscillator wavefunctions are either even for even $n$ or odd for odd $n$, $\hat{P}_{12} \ket{n_1} = (-1)^{n_1} \ket{n_1}$ and the symmetrizer is already diagonal with eigenvalue 0 for odd $n_1$ and eigenvalue 1 for even $n_1$. We select the states with eigenvalue 1 to create our symmetric harmonic oscillator basis for the 2-particle system.
 
@@ -114,7 +117,11 @@ Since the states included in our to-be-symmetrized basis are already symmetric w
 \end{equation}
 where $N'=n_1' +n_2'$, $N=n_1 + n_2$, and $\bra{n_1' n_2'}\ket{n_1 n_2}_3$ is the 1-dimensional harmonic oscillator transformation bracket for particles with mass ratio 3. This transformation bracket value is calculated as
 \begin{equation}
-\bra{n_1' n_2'}\ket{n_1 n_2}_3 = \frac{\sqrt{n_1!n_2!}}{\sqrt{n_1'!n_2'!}}\sum_{k=0}^{n_1'}\binom{n_1'}{k}\binom{n_2'}{n_2 - k}\left(\frac{1}{2}\right)^{n_1' + n_2 - 2k}\left(\frac{\sqrt{3}}{2}\right)^{n_2' - n_2 + 2k} (-1)^{n_2-k}.
+\bra{n_1' n_2'}\ket{n_1 n_2}_3 =
+\frac{\sqrt{n_1!n_2!}}{\sqrt{n_1'!n_2'!}}\sum_{k=0}^{n_1'}\binom{n_1'}{k}\binom{n_2'}{n_2
+- k}\left(\frac{1}{2}\right)^{n_1' + n_2 -
+2k}\left(\frac{\sqrt{3}}{2}\right)^{n_2' - n_2 + 2k} (-1)^{n_2-k}
+\delta_{n_{1}' + n_{2}',n_{1} + n_{2}}.
 \end{equation}
 Diagonalizing $\hat{S}$ will give eigenvectors that are normalized linear combinations of product states with the same total harmonic oscillator number $N$. We again select the ones with eigenvalue 1 and keep those as our fully symmetrized 3-body basis. While the project leading up to this thesis only worked with 2-particle and 3-particle systems and thus only the treatment of symmetrizing those bases is relevant to this work, the procedure is generalizable to symmetrize up to any $A$-particle basis. The details of this procedure are explained in Ref.~\cite{Jurgenson:2008jp}.
 
@@ -129,7 +136,8 @@ where $k$ is the number of states in the linear combination, the $c_l$ are the c
 \begin{aligned}
 \bra{N_A' i_A'}\hat{T}_A\ket{N_A i_A} = & \sum_{l=1}^k \sum_{l'=1}^{k'} c_l c_{l'}' (\bra{N_{A-1}'
 i_{A-1}'}\hat{T}_{A-1}\ket{N_{A-1} i_{A-1}}\delta_{n_{A-1}',n_{A-1}} \\
-& - \frac{\omega}{4}\delta_{N_{A-1}',N_{A-1}}(\sqrt{(n_{A-1} + 1)(n_{A-1} + 2)}\delta_{n_{A-1}',n_{A-1} + 2} \\
+                                        & -
+                                        \frac{\omega}{4}\delta_{N_{A-1}',N_{A-1}}\delta_{i_{A-1}',i_{A-1}}(\sqrt{(n_{A-1} + 1)(n_{A-1} + 2)}\delta_{n_{A-1}',n_{A-1} + 2} \\
 & + \sqrt{n_{A-1}(n_{A-1} - 1)}\delta_{n_{A-1}',n_{A-1} - 2} \\
 & - (2 n_{A-1} + 1)\delta_{n_{A-1}',n_{A-1}})).
 \end{aligned}
